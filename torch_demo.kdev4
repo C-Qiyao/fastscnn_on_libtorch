@@ -1,0 +1,3 @@
+[Project]
+Name=torch_demo
+Manager=KDevCMakeManager
