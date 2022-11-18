@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.0)
 project(torch_demo)
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_BUILD_TYPE "Release")
-set(PROJECT_DIR "/home/qiyao/codes/torch_demo/")
+set(PROJECT_DIR "/home/qiyao/codes/torch_demo")
 #set(Torch_DIR "/home/qiyao/LIBS/libtorch-cxx11-abi-shared-with-deps-1.13.0+cu117/libtorch/share/cmake/Torch")
 set(OPTION "-O3 -Wall -Wextra")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OPTION} ${TORCH_CXX_FLAGS} ")
@@ -25,12 +25,20 @@ message(STATUS "libtorch library status:")
 message(STATUS "    config: ${Torch_DIR}")
 message(STATUS "    version: ${Torch_VERSION}")
 
+link_directories("${PROJECT_DIR}/lib/64")
+
 include_directories(${PROJECT_DIR} )
+
+include_directories("${PROJECT_DIR}/include" "/usr/include/X11" "/usr/include")
+
+link_libraries("${PROJECT_DIR}/lib/64/libMvCameraControl.so")
 
 add_executable(torch_demo torch_test2.cpp)
 
 add_library(segnet SHARED network.cpp)
-target_link_libraries(torch_demo segnet ${TORCH_LIBRARIES} ${OpenCV_LIBS} )
+add_library(camera_class SHARED camera_class.cpp)
+
+target_link_libraries(torch_demo segnet camera_class ${TORCH_LIBRARIES} ${OpenCV_LIBS} -lX11 libMvCameraControl.so)
 target_include_directories(torch_demo PRIVATE CUDA_INCLUDE_DIRS)
 
 
