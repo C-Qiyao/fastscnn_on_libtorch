@@ -1,11 +1,14 @@
 #include "network.h"
-network::network(const std::string& filename)
+network::network(const std::string& filename,bool using_gpu)
 {
-    std::cout <<"cuda::is_available():" << torch::cuda::is_available() << std::endl;
-    // Deserialize the ScriptModule from a file using torch::jit::load().
     device_type = at::kCPU; // 定义设备类型
-    if (torch::cuda::is_available())device_type = at::kCUDA;
-    cout<<"using device"<<device_type<<endl;
+    if(using_gpu)
+    {
+        std::cout <<"cuda::is_available():" << torch::cuda::is_available() << std::endl;
+        // Deserialize the ScriptModule from a file using torch::jit::load().
+        if (torch::cuda::is_available())device_type = at::kCUDA;
+    }
+    cout<<"using device: "<<device_type<<endl;
     module = torch::jit::load(filename);
     module.eval();
     module.to(device_type);

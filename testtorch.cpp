@@ -1,4 +1,5 @@
 #include "torch/torch.h"
+#include "camera_class.h"
 #include <torch/script.h> // One-stop header.
 #include <tuple>
 #include <iostream>
@@ -19,15 +20,14 @@ int main(int argc, const char *argv[])
     torch::Tensor result;
     torch::Tensor predraw;
     torch::Tensor image_tensor;
-
-
+    std::vector<torch::jit::IValue> inputs;
 
 
     std::cout <<"cuda::is_available():" << torch::cuda::is_available() << std::endl;
     // Deserialize the ScriptModule from a file using torch::jit::load().
     torch::DeviceType device_type = at::kCPU; // 定义设备类型
     if (torch::cuda::is_available())device_type = at::kCUDA;
-    torch::jit::script::Module module = torch::jit::load("/home/qiyao/python_codes/fastscnn_cv/model_scnn.pt",device_type);
+    torch::jit::script::Module module = torch::jit::load("/home/qiyao/python_codes/fastscnn_cv/model_scnn.pt");
     module.eval();
     module.to(device_type);
 
@@ -46,7 +46,6 @@ int main(int argc, const char *argv[])
     image_tensor=image_tensor.to(device_type);
     //cout<<"image is leaf:"<<image_tensor.is_leaf()<<endl;
 
-    std::vector<torch::jit::IValue> inputs;
     inputs.emplace_back(image_tensor);
     torch::NoGradGuard no_grad;
     result=module.forward(inputs).toTuple()->elements()[0].toTensor();
@@ -55,7 +54,7 @@ int main(int argc, const char *argv[])
     pred=pred.to(torch::kU8);
     pred=pred.to(torch::kCPU);
     pred=pred*10;
-    //inputs.pop_back();
+    inputs.pop_back();
     Mat outimg(Size{640,480},CV_8U,pred.data_ptr());
 
     imshow("label",outimg);

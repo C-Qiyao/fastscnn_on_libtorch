@@ -27,7 +27,7 @@ private:
     Mat pic;
     Mat grey;
 public:
-    network(const std::string& filename);
+    network(const std::string& filename,bool using_gpu);
     Mat seg_pic(Mat img);
 
 };
