@@ -22,6 +22,9 @@ cv::Mat network::seg_pic(cv::Mat img)
     image_tensor=image_tensor.permute({0,3,1,2});
     image_tensor=image_tensor.toType(torch::kFloat);
     image_tensor=image_tensor.div(255);
+    image_tensor[0][0]=image_tensor[0][0].sub_(0.485).div_(0.229);
+    image_tensor[0][1]=image_tensor[0][1].sub_(0.456).div_(0.224);
+    image_tensor[0][2]=image_tensor[0][2].sub_(0.406).div_(0.225);
     image_tensor=image_tensor.to(device_type);
     //cout<<"image is leaf:"<<image_tensor.is_leaf()<<endl;
 

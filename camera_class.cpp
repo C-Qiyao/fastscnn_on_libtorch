@@ -62,8 +62,11 @@ void camera::start_cam()
     MV_CC_SetEnumValue(handle, "GainAuto", 1);
     MV_CC_SetFloatValue(handle, "Gamma", 0.8);
     MV_CC_SetBoolValue(handle, "GammaEnable", 1);
+    //MV_CC_SetEnumValue(handle, "ImageCompressionMode", 1);//jpeg
     MV_CC_SetEnumValue(handle, "BalanceWhiteAuto", 1);//自动白平衡 0/关闭 1/连续 2/单次
     MV_CC_SetEnumValue(handle, "ExposureAuto", 2);//自动曝光 0/关闭 1/单次 2/连续
+    MV_CC_SetEnumValue(handle, "GainAuto", 2);//自动曝光 0/关闭 1/单次 2/连续
+    MV_CC_SetBoolValue(handle, "ADCGainEnable", 1);
     MV_CC_GetIntValue(handle, "PayloadSize", &stParam);
     g_nPayloadSize = stParam.nCurValue;
     nRet = MV_CC_StartGrabbing(handle);
