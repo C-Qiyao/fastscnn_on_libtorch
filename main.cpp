@@ -89,8 +89,6 @@ int main(int argc, char** argv)
         int k=waitKey(1);
         if (k==27)
         {
-            //cout<<out_clolored.cols<<out_clolored.rows<<endl;
-            //cout<<cap_pic.cols<<cap_pic.rows<<endl;
 #if USING_NETCAM == 1
             cam.close_cam();
 #endif
