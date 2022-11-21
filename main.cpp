@@ -1,4 +1,4 @@
-#define USING_NETCAM 1
+#define USING_NETCAM 0
 #include "network.h"
 #include "camera_class.h"
 #include <iostream>
@@ -25,7 +25,6 @@ int main(int argc, char** argv)
     bool computeMd=true;
     //cout<<"argc:"<<argc<<endl;
     if(argc>1){
-
         if(strcmp(argv[1],"cpu")*strcmp(argv[1],"CPU")==0)
         {
             computeMd=false;
@@ -37,7 +36,7 @@ int main(int argc, char** argv)
             compute_mode="GPU mode";
         }
     }
-    cout<<"Predicting Mode : "<<compute_mode<<endl;
+    cout<<"Predicting Mode  : "<<compute_mode<<endl;
 
 #if USING_NETCAM == 0
     VideoCapture cap;

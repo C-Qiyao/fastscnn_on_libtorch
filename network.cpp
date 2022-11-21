@@ -4,7 +4,8 @@ network::network(const std::string& filename,bool using_gpu)
     device_type = at::kCPU; // 定义设备类型
     if(using_gpu)
     {
-        std::cout <<"cuda::is_available():" << torch::cuda::is_available() << std::endl;
+        std::cout <<"cuda::is_available: " << torch::cuda::is_available() << std::endl;
+        std::cout <<"cudnn::is_available: " << torch::cuda::cudnn_is_available() << std::endl;
         // Deserialize the ScriptModule from a file using torch::jit::load().
         if (torch::cuda::is_available())device_type = at::kCUDA;
     }
