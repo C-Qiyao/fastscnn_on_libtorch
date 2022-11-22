@@ -37,7 +37,6 @@ int main(int argc, char** argv)
         }
     }
     cout<<"Predicting Mode  : "<<compute_mode<<endl;
-
 #if USING_NETCAM == 0
     VideoCapture cap;
     cap.open(0);

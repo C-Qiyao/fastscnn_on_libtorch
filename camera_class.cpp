@@ -95,7 +95,7 @@ void camera::close_cam()
     if (MV_OK == nRet)
         cout<<"Stopped Grabbing !"<<endl;
 }
-void camera::get_pic(cv::Mat* srcimg)
+void camera::get_pic(cv::Mat* img_adr)
 {
     MV_CC_GetImageBuffer(handle, &stOutFrame, 400);
     CvtParam.enSrcPixelType=stOutFrame.stFrameInfo.enPixelType;
@@ -107,8 +107,8 @@ void camera::get_pic(cv::Mat* srcimg)
     CvtParam.pDstBuffer=pDataForRGB;
     CvtParam.nSrcDataLen=stOutFrame.stFrameInfo.nFrameLen;
     MV_CC_ConvertPixelType(handle,&CvtParam);
-    *srcimg=Mat(stOutFrame.stFrameInfo.nHeight,stOutFrame.stFrameInfo.nWidth,CV_8UC3,pDataForRGB);
-    cvtColor(*srcimg,*srcimg,COLOR_RGB2BGR);
+    *img_adr=Mat(stOutFrame.stFrameInfo.nHeight,stOutFrame.stFrameInfo.nWidth,CV_8UC3,pDataForRGB);
+    cvtColor(*img_adr,*img_adr,COLOR_RGB2BGR);
     if(NULL != stOutFrame.pBufAddr)
     {
         MV_CC_FreeImageBuffer(handle, &stOutFrame);
