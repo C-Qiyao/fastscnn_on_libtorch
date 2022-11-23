@@ -4,6 +4,8 @@ fastscnn saved by pytorch and deployed on C++ with libtorch
 本项目是一个将pytorch部署至C++的尝试 
 
 # 软件环境版本
+UBUNTU=22.04
+
 pytorch=1.13.0
 
 libtorch=1.13.0
