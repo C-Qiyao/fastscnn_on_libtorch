@@ -1,5 +1,5 @@
 #include "torch/torch.h"
-#include "camera_class.h"
+#include "CAMERA/camera_class.h"
 #include <torch/script.h> // One-stop header.
 #include <tuple>
 #include <iostream>

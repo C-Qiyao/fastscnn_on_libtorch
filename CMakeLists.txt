@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.0)
 project(torch_demo)
+project(testtorch)
 set(CMAKE_CXX_STANDARD 14)
 #set(CMAKE_BUILD_TYPE "Debug")
 set(PROJECT_DIR "/home/qiyao/codes/torch_demo")
@@ -27,24 +28,27 @@ message(STATUS "libtorch library status:")
 message(STATUS "    config: ${Torch_DIR}")
 message(STATUS "    version: ${Torch_VERSION}")
 
-link_directories("${PROJECT_DIR}/lib/64")
+link_directories("${PROJECT_DIR}/MVS/lib/64")
 
 include_directories(${PROJECT_DIR} )
 
-include_directories("${PROJECT_DIR}/include" "/usr/include/X11" "/usr/include")
+include_directories("${PROJECT_DIR}/MVS/include" "/usr/include/X11" "/usr/include")
 
-link_libraries("${PROJECT_DIR}/lib/64/libMvCameraControl.so")
+link_libraries("${PROJECT_DIR}/MVS/lib/64/libMvCameraControl.so")
 
 add_executable(torch_demo main.cpp)
 
-add_library(segnet SHARED network.cpp)
-add_library(camera_class SHARED camera_class.cpp)
-add_library(algroth SHARED algroth.cpp)
+add_library(segnet SHARED SIGNET/network.cpp)
+add_library(camera_class SHARED CAMERA/camera_class.cpp)
+add_library(algroth SHARED CAMERA/algroth.cpp)
 
 target_link_libraries(torch_demo ${TORCH_LIBRARIES} ${OpenCV_LIBS} )
 target_link_libraries(torch_demo libMvCameraControl.so -lX11)
 target_link_libraries(torch_demo algroth  segnet camera_class)
 target_include_directories(torch_demo PRIVATE CUDA_INCLUDE_DIRS)
+
+
+
 
 
 

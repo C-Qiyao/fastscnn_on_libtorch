@@ -1,6 +1,6 @@
 #define USING_NETCAM 0
-#include "network.h"
-#include "camera_class.h"
+#include "SIGNET/network.h"
+#include "CAMERA/camera_class.h"
 #include <iostream>
 #include <string>
 #include "opencv2/core.hpp"
@@ -8,7 +8,7 @@
 #include "opencv2/highgui.hpp"
 #include <opencv2/video/video.hpp>
 #include <opencv2/opencv.hpp>
-#include "algroth.cpp"
+#include "CAMERA/algroth.cpp"
 
 const int para_time=100;
 
