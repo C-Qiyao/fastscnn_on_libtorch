@@ -22,5 +22,10 @@ py文件为转换模型所使用的实例，将pytorch内的网络转换成.pt�
 
 ./MVS  文件夹内包含了海康工业相机的驱动库
 
+# 测试效果（模型尚未训练完备）
+
+![net_test](https://user-images.githubusercontent.com/74750146/203498742-a1c6e2b7-050a-4bb3-99ff-148f90f1b881.png)
+
 ## *使用之前需要修改Cmakelist.txt 内的工程目录地址，以及main函数内加载神经网络的文件路径
+
 
