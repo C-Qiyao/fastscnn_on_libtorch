@@ -6,7 +6,22 @@ set(CMAKE_CXX_STANDARD 14)
 set(PROJECT_DIR "/home/qiyao/codes/torch_demo")
 #set(Torch_DIR "/home/qiyao/LIBS/libtorch-cxx11-abi-shared-with-deps-1.13.0+cu117/libtorch/share/cmake/Torch")
 #set(OPTION "-O3 -Wall -Wextra")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OPTION} ${TORCH_CXX_FLAGS} ")
+
+if(CMAKE_BUILD_TYPE AND (CMAKE_BUILD_TYPE STREQUAL "Debug"))
+    set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -Wall -O0 ${TORCH_CXX_FLAGS} ")
+    message("Debug mode:${CMAKE_C_FLAGS_DEBUG}")
+
+elseif(CMAKE_BUILD_TYPE AND (CMAKE_BUILD_TYPE STREQUAL "Release"))
+    set(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} -Wall -O3 ${TORCH_CXX_FLAGS} ")
+    message("Release mode:${CMAKE_C_FLAGS_RELEASE}")
+else()
+    message("else:${CMAKE_BUILD_TYPE}")
+    message("else:${CMAKE_C_FLAGS_RELEASE}")
+    add_executable(test_release ${src_dirs})
+endif()
+
+
+#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OPTION} ${TORCH_CXX_FLAGS} ")
 message(STATUS"Build type: ${CMAKE_BUILD_TYPE}")
 set(CUDA_INCLUDE_DIRS "/usr/local/cuda/include")
 

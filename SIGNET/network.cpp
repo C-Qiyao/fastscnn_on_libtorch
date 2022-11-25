@@ -14,6 +14,8 @@ network::network(const std::string& filename,bool using_gpu)
     module.eval();
     module.to(device_type);
     cout<<"finish loading model"<<endl;
+    torch::set_num_threads(2);
+    cout<<"Using CPU threads: "<<torch::get_num_threads<<endl;
 }
 cv::Mat network::seg_pic(cv::Mat img)
 {
