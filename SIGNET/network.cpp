@@ -38,8 +38,9 @@ cv::Mat network::seg_pic(cv::Mat img)
     torch::Tensor pred=predraw.squeeze();
     pred=pred.to(torch::kU8);
     pred=pred.to(torch::kCPU);
-    pred=pred*10;
+    //cout<<pred<<endl;
     inputs.pop_back();
     Mat outimg(Size{640,480},CV_8U,pred.data_ptr());
+    //cout<<outimg<<endl;
     return outimg;
 }
