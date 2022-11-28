@@ -5,6 +5,7 @@ project(testtorch)
 set(CMAKE_CXX_STANDARD 14)
 #set(CMAKE_BUILD_TYPE "Debug")
 set(PROJECT_DIR "/home/qiyao/codes/torch_demo")
+
 #set(Torch_DIR "/home/qiyao/LIBS/libtorch-cxx11-abi-shared-with-deps-1.13.0+cu117/libtorch/share/cmake/Torch")
 #set(OPTION "-O3 -Wall -Wextra")
 
