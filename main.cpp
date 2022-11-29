@@ -1,4 +1,5 @@
 #define USING_NETCAM 0
+#define TEST_MODE 1
 #include "SIGNET/network.h"
 #include "CAMERA/camera_class.h"
 #include <iostream>
@@ -21,6 +22,7 @@ int main(int argc, char** argv)
     vector<Point2f>feature_after;
     vector<uchar> status;
     vector<float> err;
+    float max_fps=0;
     cv::cuda::GpuMat gpumat1(480,640,CV_8UC3);
     double fps;
     double t0,t1;
@@ -70,6 +72,7 @@ int main(int argc, char** argv)
         t0=double(getTickCount());
 #if USING_NETCAM == 0
         cap.read(cap_pic);
+        
 #else
         cam.get_pic(&unresized_cam);
         resize(unresized_cam,cap_pic,Size(640,480));
@@ -100,16 +103,19 @@ int main(int argc, char** argv)
         }
         feature_after.resize(k);//截取
         //cout << k << endl;
+
         for (int i = 0; i < feature_after.size(); i++)
         {
             //将特征点画一个小圆出来--粗细为2
-            imshow("sigcopy",sig_feature);
+            //imshow("sigcopy",sig_feature);
             if((int)sig_feature.at<uchar>(feature_after[i])!=12 && (int)sig_feature.at<uchar>(feature_after[i])!=13 && (int)sig_feature.at<uchar>(feature_after[i])<13)
             {
                 circle(now_raw, feature_after[i], 3, Scalar(0,255,255), 2);
             }
 
         }
+
+
         imshow("oldraw",now_raw);
 
 
@@ -118,6 +124,11 @@ int main(int argc, char** argv)
 
         t1=double(getTickCount());
         fps=1.0/((t1-t0)/getTickFrequency());
+        if(fps>max_fps)
+        {
+            max_fps=(float)fps;
+            cout<<"max fps:"<<fps<<endl;
+        }
         sprintf(fps_str,"%0.2f",fps);
         string fpsString("FPS:");
         fpsString+=fps_str;
