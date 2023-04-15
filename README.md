@@ -3,6 +3,8 @@ fastscnn saved by pytorch and deployed on C++ with libtorch
 
 本项目是一个将pytorch部署至C++的尝试 
 
+[![Security Status](https://s.murphysec.com/badge/C-Qiyao/fastscnn_on_libtorch.svg)](https://www.murphysec.com/p/C-Qiyao/fastscnn_on_libtorch)
+
 # 软件环境版本
 UBUNTU=22.04
 
@@ -36,5 +38,5 @@ https://user-images.githubusercontent.com/74750146/204536524-b7365870-9c70-47fc-
 
 ## *使用之前需要修改Cmakelist.txt 内的工程目录地址，以及main函数内加载神经网络的文件路径
 
-[![Security Status](https://s.murphysec.com/badge/C-Qiyao/fastscnn_on_libtorch.svg)](https://www.murphysec.com/p/C-Qiyao/fastscnn_on_libtorch)
+
 
