@@ -36,5 +36,5 @@ https://user-images.githubusercontent.com/74750146/204536524-b7365870-9c70-47fc-
 
 ## *使用之前需要修改Cmakelist.txt 内的工程目录地址，以及main函数内加载神经网络的文件路径
 
-
+[![Security Status](https://s.murphysec.com/badge/C-Qiyao/fastscnn_on_libtorch.svg)](https://www.murphysec.com/p/C-Qiyao/fastscnn_on_libtorch)
 
